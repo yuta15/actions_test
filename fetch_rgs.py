@@ -8,7 +8,6 @@ from azure.mgmt.resource import ResourceManagementClient
 
 def fetch_rgs():
     SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID")
-    print(os.environ)
     credentail = DefaultAzureCredential()
     client = ResourceManagementClient(credential=credentail, subscription_id=SUBSCRIPTION_ID)
     resource_groups = client.resource_groups.list()
