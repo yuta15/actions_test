@@ -31,14 +31,6 @@ jobs:
                 echo "${GITHUB_ENV}"
                 echo "${ENVS}"
 
-    job2:
-        runs-on: ubuntu-latest
-        needs: run_python
-        steps:
-            - name: Print environment variables
-              run: |
-                echo "ENVS=${ARG1}/${ARG2}/${ARG3}"
-
     call_wf:
         needs: job2
         uses: ./.github/workflows/second.yaml
@@ -62,7 +54,4 @@ jobs:
             
             - name: check directory
               run: |
-                echo "Directory contents:"
-                ls -la "${{ needs.call_wf.outputs.RET_VAL }}"
-                echo "Config file content:"
-                cat test/config.json
+                ls -la
