@@ -2,55 +2,38 @@ name: second
 on:
     workflow_call:
         inputs:
-            ENV:
-                required: true
-                type: string
-            ARG1:
-                required: true
-                type: string
-            ARG2:
-                required: true
-                type: string
-            ARG3:
+            rg_ids:
+                description: 'Resource Group IDs'
                 required: true
                 type: string
         secrets:
-            SECRET1:
+            AZURE_CLIENT_ID:
+                description: 'Azure Client ID'
                 required: true
-            SECRET2:
+            AZURE_CLIENT_SECRET:
+                description: 'Azure Client Secret'
                 required: true
-            SECRET3:
+            AZURE_TENANT_ID:
+                description: 'Azure Tenant ID'
                 required: true
-        outputs:
-            RET_VAL:
-                description: 'Return value from the Python script'
-                value: ${{ jobs.check_input.outputs.ret_val }}
+            AZURE_SUBSCRIPTION_ID:
+                description: 'Azure Subscription ID'
+                required: true
 jobs:
-    check_input:
+    get_rg_data:
         runs-on: ubuntu-latest
-        outputs:
-            ret_val: ${{ steps.run_python.outputs.ret_val }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
-
             - name: Set up Python
               uses: actions/setup-python@v4
               with:
                 python-version: '3.12'
-
             - name: Install dependencies
               run: |
-                python -m pip install --upgrade pip 
+                python -m pip install --upgrade pip
                 python -m pip install -r requirements.txt
-
             - name: Print input variables
               id: run_python
               run: |
-                ret_val=$(python run_python.py "${{ inputs.ARG1 }}")
-                echo "ret_val=${ret_val}" >> "$GITHUB_OUTPUT"
-            
-            - name: check dir
-              run: |
-                ls -la
-                ls -la test
+                python get_rg_dat.py "${{ inputs.rg_ids }}"
