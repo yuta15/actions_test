@@ -41,4 +41,5 @@ jobs:
             - name: Print input variables
               id: run_python
               run: |
-                python get_rg_dat.py "${{ inputs.rg_ids }}"
+                test=$(python get_rg_dat.py "${{ inputs.rg_ids }}")
+                echo $test
