@@ -24,8 +24,12 @@ jobs:
 
             - name: Install dependencies
               run: |
-                echo "${ARG1}, ${ARG2}, ${ARG3}"
-                echo "${SECRET1}, ${SECRET2}, ${SECRET3}"
+                echo "NAME=${ARG1}/${ARG2}/${ARG3}" > "$GITHUB_ENV"
+                echo "${SECRET1}, ${SECRET2}, ${SECRET3}" > "$GITHUB_ENV"
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
+            
+            - name: check env
+              run: |
+                echo "${GITHUB_ENV}"
 
