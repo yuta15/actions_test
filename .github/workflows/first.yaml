@@ -22,6 +22,10 @@ jobs:
             - name: fetch_ids
               id: fetch_ids
               run: |
+                  echo "${secrets.AZURE_CLIENT_ID}"
+                  echo "${secrets.AZURE_CLIENT_SECRET}"
+                  echo "${secrets.AZURE_TENANT_ID}"
+                  echo "${secrets.AZURE_SUBSCRIPTION_ID}"
                   rg_ids=$(python fetch_rgs.py)
                   echo "rg_ids=${rg_ids}" >> "$GITHUB_OUTPUT"
 
