@@ -40,3 +40,15 @@ jobs:
             - name: Print environment variables
               run: |
                 echo "ENVS=${ARG1}/${ARG2}/${ARG3}"
+
+    call_wf:
+        uses: ./.github/workflows/second.yaml
+        with:
+            ENV: ${{ env.ENV }}
+            ARG1: ${{ env.ARG1 }}
+            ARG2: ${{ env.ARG2 }}
+            ARG3: ${{ env.ARG3 }}
+        secrets:
+            SECRET1: ${{ secrets.SECRET1 }}
+            SECRET2: ${{ secrets.SECRET2 }}
+            SECRET3: ${{ secrets.SECRET3 }}
