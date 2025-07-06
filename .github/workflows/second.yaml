@@ -31,6 +31,16 @@ jobs:
         outputs:
             ret_val: ${{ steps.run_python.outputs.ret_val }}
         steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.12'
+            - name: Install dependencies
+              run: |
+                pip install --upgrade pip
+                pip install -r requirements.txt
             - name: Print input variables
               id: run_python
               run: |
