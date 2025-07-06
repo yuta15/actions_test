@@ -40,6 +40,7 @@ jobs:
                 echo "ENVS=${ARG1}/${ARG2}/${ARG3}"
 
     call_wf:
+        needs: job2
         uses: ./.github/workflows/second.yaml
         with:
             ENV: "${{ env.ENV }}"
