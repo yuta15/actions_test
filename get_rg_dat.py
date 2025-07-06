@@ -7,7 +7,7 @@ from azure.mgmt.resource import ResourceManagementClient
 from azure.identity import DefaultAzureCredential
 
 
-def main(rg_ids: str):
+def main(rg_ids: list):
     credential = DefaultAzureCredential()
     subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
     client = ResourceManagementClient(credential, subscription_id)
@@ -16,7 +16,7 @@ def main(rg_ids: str):
     for id in rg_ids:
         name = id.split('/')[-1]
         rg = client.resource_groups.get(resource_group_name=name)
-        rgs.append(rg)
+        rgs.append(rg.as_dict())
     json.dump(rgs, sys.stdout, indent=4)
 
 
