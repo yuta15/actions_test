@@ -29,10 +29,8 @@ jobs:
             - name: fetch_ids
               id: fetch_ids
               run: |
-                  rg_ids=$(python fetch_rgs.py)
-                  echo "rg_ids<<EOF" >> "$GITHUB_OUTPUT"
-                  echo ${rg_ids} >> "$GITHUB_OUTPUT"
-                  echo "EOF" >> "$GITHUB_OUTPUT"
+                  rg_ids=$(python fetch_rgs.py | jq -c)
+                  echo "rg_ids=${rg_ids}" >> "$GITHUB_OUTPUT"
 
 
     call_wf:
