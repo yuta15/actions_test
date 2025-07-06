@@ -7,9 +7,7 @@ env:
     ARG1: ${{ vars.ARG1 }}
     ARG2: ${{ vars.ARG2 }}
     ARG3: ${{ vars.ARG3 }}
-    SECRET1: ${{ secrets.SECRET1 }}
-    SECRET2: ${{ secrets.SECRET2 }}
-    SECRET3: ${{ secrets.SECRET3 }}
+
 jobs:
     run_python:
         runs-on: ubuntu-latest
@@ -44,11 +42,11 @@ jobs:
     call_wf:
         uses: ./.github/workflows/second.yaml
         with:
-            ENV: "${ENV}"
-            ARG1: "${ARG1}"
-            ARG2: "${ARG2}"
-            ARG3: "${ARG3}"
+            ENV: "${{ env.ENV }}"
+            ARG1: "${{ env.ARG1 }}"
+            ARG2: "${{ env.ARG2 }}"
+            ARG3: "${{ env.ARG3 }}"
         secrets:
-            SECRET1: "${SECRET1}"
-            SECRET2: "${SECRET2}"
-            SECRET3: "${SECRET3}"
+            SECRET1: "${{ secrets.SECRET1 }}"
+            SECRET2: "${{ secrets.SECRET2 }}"
+            SECRET3: "${{ secrets.SECRET3 }}"
