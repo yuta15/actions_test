@@ -1,0 +1,36 @@
+name: second
+on:
+    workflow_call:
+        inputs:
+            ENV:
+                required: true
+                type: string
+            ARG1:
+                required: true
+                type: string
+            ARG2:
+                required: true
+                type: string
+            ARG3:
+                required: true
+                type: string
+        secrets:
+            SECRET1:
+                required: true
+            SECRET2:
+                required: true
+            SECRET3:
+                required: true
+jobs:
+    check_input:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print input variables
+              run: |
+                echo "ENV=${{ inputs.ENV }}"
+                echo "ARG1=${{ inputs.ARG1 }}"
+                echo "ARG2=${{ inputs.ARG2 }}"
+                echo "ARG3=${{ inputs.ARG3 }}"
+                echo "SECRET1=${{ secrets.SECRET1 }}"
+                echo "SECRET2=${{ secrets.SECRET2 }}"
+                echo "SECRET3=${{ secrets.SECRET3 }}"
