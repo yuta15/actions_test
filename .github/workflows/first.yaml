@@ -59,3 +59,10 @@ jobs:
             - name: Print output
               run: |
                 echo "Return value from second workflow: ${{ needs.call_wf.outputs.RET_VAL }}"
+            
+            - name: check directory
+              run: |
+                echo "Directory contents:"
+                ls -la "${{ needs.call_wf.outputs.RET_VAL }}"
+                echo "Config file content:"
+                cat test/config.json
