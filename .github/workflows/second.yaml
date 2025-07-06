@@ -33,16 +33,19 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+
             - name: Set up Python
               uses: actions/setup-python@v4
               with:
                 python-version: '3.12'
+
             - name: Install dependencies
               run: |
-                pip install --upgrade pip
-                pip install -r requirements.txt
+                python -m pip install --upgrade pip 
+                python -m pip install -r requirements.txt
+
             - name: Print input variables
               id: run_python
               run: |
-                ret_val=python run_python.py ${{ inputs.ARG1 }}
-                echo $ret_val >> $GITHUB_OUTPUT
+                ret_val=$(python run_python.py "${{ inputs.ARG1 }}")
+                echo "ret_val=${ret_val}" >> "$GITHUB_OUTPUT"
