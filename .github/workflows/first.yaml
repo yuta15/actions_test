@@ -13,7 +13,7 @@ jobs:
     fetch_rgs:
         runs-on: ubuntu-latest
         outputs:
-            rg_ids: ${{ steps.fetch_ids.outcomets.rg_ids }}
+            rg_ids: ${{ steps.fetch_ids.outputs.rg_ids }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
