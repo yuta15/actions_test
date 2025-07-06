@@ -9,28 +9,6 @@ env:
     ARG3: ${{ vars.ARG3 }}
 
 jobs:
-    run_python:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                python-version: '3.12'
-
-            - name: Install dependencies
-              run: |
-                echo "ENVS=${ARG1}/${ARG2}/${ARG3}" > "${GITHUB_ENV}"
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
-            
-            - name: check env
-              run: |
-                echo "${GITHUB_ENV}"
-                echo "${ENVS}"
-
     call_wf:
         uses: ./.github/workflows/second.yaml
         with:
