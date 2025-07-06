@@ -41,5 +41,7 @@ jobs:
             - name: Print input variables
               id: run_python
               run: |
+                # Ensure the input is a valid JSON string
+                echo "Input RG IDs: ${{ inputs.rg_ids }}"
                 test=$(python get_rg_dat.py "${{ inputs.rg_ids }}")
                 echo $test
