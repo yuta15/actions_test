@@ -32,7 +32,6 @@ jobs:
                 echo "${ENVS}"
 
     call_wf:
-        needs: job2
         uses: ./.github/workflows/second.yaml
         with:
             ENV: ${{ vars.ENV }}
