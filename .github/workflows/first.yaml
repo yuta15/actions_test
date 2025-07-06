@@ -39,4 +39,4 @@ jobs:
         steps:
             - name: Print environment variables
               run: |
-                echo "${ENVS}"
+                echo "ENVS=${ARG1}/${ARG2}/${ARG3}"
