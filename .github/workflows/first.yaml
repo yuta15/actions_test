@@ -31,4 +31,5 @@ jobs:
             - name: check env
               run: |
                 echo "${GITHUB_ENV}"
+                echo "${ENVS}"
 
