@@ -12,7 +12,7 @@ def main(rg_ids: str):
     subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
     client = ResourceManagementClient(credential, subscription_id)
     rg_ids = json.loads(rg_ids)
-    rgs = -[]
+    rgs = []
     for id in rg_ids:
         name = id.split('/')[-1]
         rg = client.resource_groups.get(resource_group_name=name)
