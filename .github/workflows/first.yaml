@@ -25,6 +25,9 @@ jobs:
         runs-on: ubuntu-latest
         needs: call_wf
         steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
             - name: Print output
               run: |
                 echo "Return value from second workflow: ${{ needs.call_wf.outputs.RET_VAL }}"
