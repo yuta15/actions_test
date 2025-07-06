@@ -19,13 +19,15 @@ on:
             AZURE_SUBSCRIPTION_ID:
                 description: 'Azure Subscription ID'
                 required: true
-env:
-    AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-    AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-    AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-    AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
 jobs:
     get_rg_data:
+        env:
+            rg_ids: ${{ inputs.rg_ids }}
+            AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+            AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+            AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+            AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -42,6 +44,6 @@ jobs:
               id: run_python
               run: |
                 # Ensure the input is a valid JSON string
-                echo "Input RG IDs: ${{ inputs.rg_ids }}"
-                test=$(python get_rg_dat.py "${{ inputs.rg_ids }}")
+                echo "Input RG IDs: $rg_ids"
+                test=$(python get_rg_dat.py "${rg_ids}")
                 echo $test
