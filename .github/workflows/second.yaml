@@ -49,3 +49,8 @@ jobs:
               run: |
                 ret_val=$(python run_python.py "${{ inputs.ARG1 }}")
                 echo "ret_val=${ret_val}" >> "$GITHUB_OUTPUT"
+            
+            - name: check dir
+              run: |
+                ls -la
+                ls -la test
