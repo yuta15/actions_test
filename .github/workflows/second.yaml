@@ -21,16 +21,18 @@ on:
                 required: true
             SECRET3:
                 required: true
+        outputs:
+            RET_VAL:
+                description: 'Return value from the Python script'
+                value: ${{ jobs.check_input.outputs.ret_val }}
 jobs:
     check_input:
         runs-on: ubuntu-latest
+        outputs:
+            ret_val: ${{ steps.run_python.outputs.ret_val }}
         steps:
             - name: Print input variables
+              id: run_python
               run: |
-                echo "ENV=${{ inputs.ENV }}"
-                echo "ARG1=${{ inputs.ARG1 }}"
-                echo "ARG2=${{ inputs.ARG2 }}"
-                echo "ARG3=${{ inputs.ARG3 }}"
-                echo "SECRET1=${{ secrets.SECRET1 }}"
-                echo "SECRET2=${{ secrets.SECRET2 }}"
-                echo "SECRET3=${{ secrets.SECRET3 }}"
+                ret_val=python run_python.py ${{ inputs.ARG1 }}
+                echo $ret_val >> $GITHUB_OUTPUT
